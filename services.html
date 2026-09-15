@@ -1505,6 +1505,68 @@ html,body{max-width:100%;overflow-x:hidden}
 @media (prefers-reduced-motion:reduce){
   [data-aos]{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+/* ADDRESS — NON-CLICKABLE + DESKTOP HOVER ONLY */
+.footer-address{
+  cursor:default;
+}
+
+/* Desktop / mouse only */
+@media (min-width:1025px) and (hover:hover) and (pointer:fine){
+
+  .footer-address{
+    transition:
+      color .3s ease,
+      transform .3s ease;
+  }
+
+  .footer-address:hover{
+    color:#a8dfff;
+    transform:translateY(-3px);
+  }
+
+  .footer-address:hover .footer-contact-icon{
+    border-color:rgba(55,190,255,.55);
+    box-shadow:0 0 17px rgba(22,140,255,.18);
+    color:#fff;
+    transform:scale(1.08);
+  }
+
+  .footer-address:hover .footer-contact-icon i{
+    transform:translateX(3px);
+  }
+
+  .footer-address .footer-contact-icon,
+  .footer-address .footer-contact-icon i{
+    transition:
+      transform .3s ease,
+      color .3s ease,
+      border-color .3s ease,
+      box-shadow .3s ease;
+  }
+}
+
+/* Tablet / Mobile / Touch — NO hover effect */
+@media (max-width:1024px), (hover:none), (pointer:coarse){
+
+  .footer-address,
+  .footer-address:hover{
+    cursor:default !important;
+    transform:none !important;
+    color:#71808e !important;
+  }
+
+  .footer-address:hover .footer-contact-icon{
+    transform:none !important;
+    color:#42bfff !important;
+    border-color:rgba(22,140,255,.2) !important;
+    box-shadow:none !important;
+  }
+
+  .footer-address:hover .footer-contact-icon i{
+    transform:none !important;
+  }
+}
 </style>
 
 </head>
@@ -1841,10 +1903,12 @@ html,body{max-width:100%;overflow-x:hidden}
 
     <!-- CONTACT STRIP -->
     <div class="footer-contact-strip" data-aos="fade-up">
-      <a href="404.html" class="footer-contact-item" aria-label="Office Address">
-        <span class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></span>
-        <span>MMR Complex, Salem, TN, India</span>
-      </a>
+<div class="footer-contact-item footer-address" aria-label="Office Address">
+  <span class="footer-contact-icon">
+    <i class="fa-solid fa-location-dot"></i>
+  </span>
+  <span>MMR Complex, Salem, TN, India</span>
+</div>
 
       <a href="mailto:support@stackly.com" class="footer-contact-item">
         <span class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></span>

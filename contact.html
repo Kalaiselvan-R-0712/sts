@@ -192,6 +192,23 @@ footer ul{list-style:none}footer li{margin:0 0 22px}footer li a{font-size:15px;c
 
 
 .mobile-account{display:none}
+@media (max-width:1024px), (hover:none), (pointer:coarse){
+  .contact-hero-points span,
+  .contact-hero-points span:hover{
+    transform:none !important;
+    border-color:transparent !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    color:inherit !important;
+  }
+  .contact-hero-points span i,
+  .contact-hero-points span:hover i{
+    transform:none !important;
+    text-shadow:none !important;
+    color:var(--cyan) !important;
+  }
+}
+
 @media(max-width:900px){
  .mobile-account{
   display:grid;
@@ -1471,6 +1488,35 @@ html,body{max-width:100%;overflow-x:hidden}
     text-shadow:0 0 14px rgba(25,220,255,.5);
   }
   .signal-card:hover{transform:perspective(1300px) rotateY(-1deg) rotateX(1deg) translateY(-7px);border-color:rgba(25,220,255,.52);box-shadow:0 55px 125px rgba(0,0,0,.66),0 0 80px rgba(25,220,255,.12)}
+
+  /* HERO POINTS — HOVER ONLY ON DESKTOP */
+  .contact-hero-points span{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    padding:8px 10px;
+    margin:-8px -10px;
+    border:1px solid transparent;
+    border-radius:10px;
+    cursor:default;
+    transition:transform .3s ease,border-color .3s ease,background .3s ease,
+               box-shadow .3s ease,color .3s ease;
+  }
+  .contact-hero-points span:hover{
+    transform:translateY(-3px);
+    border-color:rgba(25,220,255,.24);
+    background:linear-gradient(100deg,rgba(25,220,255,.07),rgba(123,69,255,.07));
+    box-shadow:0 10px 24px rgba(0,0,0,.22);
+    color:#dff8ff;
+  }
+  .contact-hero-points span i{
+    transition:transform .3s ease,text-shadow .3s ease,color .3s ease;
+  }
+  .contact-hero-points span:hover i{
+    transform:scale(1.18);
+    color:#55eaff;
+    text-shadow:0 0 13px rgba(25,220,255,.5);
+  }
   .direct-card:hover{transform:translateY(-9px);border-color:rgba(25,220,255,.42);box-shadow:0 27px 62px rgba(0,0,0,.42),0 0 30px rgba(25,220,255,.07)}
   .direct-card:hover .direct-card-top i{transform:rotate(-6deg) scale(1.08);background:rgba(25,220,255,.12);border-color:rgba(25,220,255,.4);color:#fff}
   .direct-card:hover h3{color:#fff}.direct-card:hover .direct-action{color:#fff}.direct-card:hover .direct-action i{transform:translateX(5px)}
@@ -1513,6 +1559,68 @@ html,body{max-width:100%;overflow-x:hidden}
 }
 @media(max-width:420px){
   .contact-hero-copy h1{font-size:39px}.heading{font-size:34px}.signal-head small{display:none}.signal-main{align-items:flex-start}.signal-route div{grid-template-columns:25px 1fr auto}.direct-card{padding:25px}.direct-action{left:25px}.contact-side-visual{height:200px}.side-code{gap:6px;padding:9px 10px;font-size:6px}.map-wrap iframe{height:350px}.map-overlay strong{font-size:20px}
+}
+
+/* ADDRESS — NON-CLICKABLE + DESKTOP HOVER ONLY */
+.footer-address{
+  cursor:default;
+}
+
+/* Desktop / mouse only */
+@media (min-width:1025px) and (hover:hover) and (pointer:fine){
+
+  .footer-address{
+    transition:
+      color .3s ease,
+      transform .3s ease;
+  }
+
+  .footer-address:hover{
+    color:#a8dfff;
+    transform:translateY(-3px);
+  }
+
+  .footer-address:hover .footer-contact-icon{
+    border-color:rgba(55,190,255,.55);
+    box-shadow:0 0 17px rgba(22,140,255,.18);
+    color:#fff;
+    transform:scale(1.08);
+  }
+
+  .footer-address:hover .footer-contact-icon i{
+    transform:translateX(3px);
+  }
+
+  .footer-address .footer-contact-icon,
+  .footer-address .footer-contact-icon i{
+    transition:
+      transform .3s ease,
+      color .3s ease,
+      border-color .3s ease,
+      box-shadow .3s ease;
+  }
+}
+
+/* Tablet / Mobile / Touch — NO hover effect */
+@media (max-width:1024px), (hover:none), (pointer:coarse){
+
+  .footer-address,
+  .footer-address:hover{
+    cursor:default !important;
+    transform:none !important;
+    color:#71808e !important;
+  }
+
+  .footer-address:hover .footer-contact-icon{
+    transform:none !important;
+    color:#42bfff !important;
+    border-color:rgba(22,140,255,.2) !important;
+    box-shadow:none !important;
+  }
+
+  .footer-address:hover .footer-contact-icon i{
+    transform:none !important;
+  }
 }
 </style>
 
@@ -1679,15 +1787,21 @@ html,body{max-width:100%;overflow-x:hidden}
 
             <div class="form-field">
               <label for="contactSubject">Enquiry Type *</label>
-              <select id="contactSubject" name="subject">
-                <option value="">Select an enquiry</option>
-                <option>Product & SaaS Development</option>
-                <option>Cloud & Infrastructure</option>
-                <option>AI & Intelligent Automation</option>
-                <option>Digital Transformation</option>
-                <option>Partnership</option>
-                <option>General Enquiry</option>
-              </select>
+              <div class="custom-select-wrap" id="contactSubjectWrap">
+                <select id="contactSubject" name="subject" class="native-subject" aria-hidden="true" tabindex="-1">
+                  <option value="">Select an enquiry</option>
+                  <option>Product & SaaS Development</option>
+                  <option>Cloud & Infrastructure</option>
+                  <option>AI & Intelligent Automation</option>
+                  <option>Digital Transformation</option>
+                  <option>Partnership</option>
+                  <option>General Enquiry</option>
+                </select>
+                <button type="button" class="custom-select-trigger" id="contactSubjectTrigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span id="contactSubjectValue">Select an enquiry</span>
+                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                </button>
+              </div>
               <div class="form-error" id="subjectError"></div>
             </div>
 
@@ -1874,10 +1988,12 @@ html,body{max-width:100%;overflow-x:hidden}
 
     <!-- CONTACT STRIP -->
     <div class="footer-contact-strip" data-aos="fade-up">
-      <a href="404.html" class="footer-contact-item" aria-label="Office Address">
-        <span class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></span>
-        <span>MMR Complex, Salem, TN, India</span>
-      </a>
+<div class="footer-contact-item footer-address" aria-label="Office Address">
+  <span class="footer-contact-icon">
+    <i class="fa-solid fa-location-dot"></i>
+  </span>
+  <span>MMR Complex, Salem, TN, India</span>
+</div>
 
       <a href="mailto:support@stackly.com" class="footer-contact-item">
         <span class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></span>
@@ -1957,7 +2073,7 @@ document.addEventListener("DOMContentLoaded",()=>{
        window.location.href="404.html";
      });
    });
-   main.querySelectorAll("button:not(.contact-submit)").forEach(button=>{
+   main.querySelectorAll("button:not(.contact-submit):not(.custom-select-trigger)").forEach(button=>{
      button.addEventListener("click",event=>{
        event.preventDefault();
        window.location.href="404.html";
@@ -2091,28 +2207,42 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 
 
+<style id="stackly-mobile-contact-form-fix">
+/* CONTACT FORM — mobile-safe custom enquiry dropdown */
+.custom-select-wrap{position:relative;width:100%}
+.native-subject{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}
+.custom-select-trigger{width:100%;height:49px;border:1px solid rgba(100,190,240,.13);outline:0;border-radius:12px;background:rgba(2,9,17,.72);color:#d8e8f4;padding:0 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;font:inherit;font-size:11px;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.custom-select-trigger i{color:#d8e8f4;font-size:11px;transition:transform .2s ease}
+.custom-select-trigger.open{border-color:rgba(25,220,255,.48);box-shadow:0 0 0 3px rgba(25,220,255,.055);background:rgba(4,14,25,.88)}
+.custom-select-trigger.open i{transform:rotate(180deg)}
+.custom-select-trigger.placeholder{color:#526b80}
+.custom-subject-menu{position:fixed;z-index:1000000;display:none;overflow-y:auto;overscroll-behavior:contain;background:#07111f;border:1px solid rgba(25,220,255,.45);border-radius:12px;box-shadow:0 18px 45px rgba(0,0,0,.55),0 0 25px rgba(25,220,255,.08);padding:5px;max-height:min(280px,calc(100vh - 24px));-webkit-overflow-scrolling:touch}
+.custom-subject-menu.open{display:block}
+.custom-subject-option{display:flex;align-items:center;min-height:42px;width:100%;padding:9px 12px;border:0;border-radius:8px;background:transparent;color:#dcecff;font:inherit;font-size:11px;text-align:left;cursor:pointer;white-space:normal;line-height:1.35;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.custom-subject-option.selected{background:rgba(25,220,255,.10);color:#55eaff}
+@media (min-width:1025px) and (hover:hover) and (pointer:fine){
+  .custom-select-trigger:hover{border-color:rgba(25,220,255,.35);background:rgba(4,14,25,.84)}
+  .custom-subject-option:hover{background:rgba(25,220,255,.10);color:#55eaff}
+}
+@media (max-width:1024px){
+  .form-field input,.form-field textarea,.custom-select-trigger{pointer-events:auto!important;user-select:text;-webkit-user-select:text;touch-action:manipulation}
+  .custom-select-trigger,.form-field input,.form-field textarea{min-height:49px}
+}
+</style>
+
 <script>
-/* FINAL TOUCH HOVER CLEANUP
-   Prevents Chrome/Android/iOS from keeping :hover on an element
-   after a tap. Desktop mouse hover remains untouched. */
+/* MOBILE CONTACT FORM — INPUT INTERACTION SAFETY
+   Never blur the active form control after a touch. */
 (function(){
   const touchQuery = window.matchMedia("(max-width:1024px), (hover:none), (pointer:coarse)");
-
   function clearTouchHover(){
     if(!touchQuery.matches) return;
-    const active=document.activeElement;
-    if(active && typeof active.blur==="function") active.blur();
     document.body.classList.remove("touch-hover");
   }
-
   document.addEventListener("touchstart",clearTouchHover,{passive:true});
   document.addEventListener("touchend",clearTouchHover,{passive:true});
   document.addEventListener("pointerup",function(e){
     if(e.pointerType==="touch") clearTouchHover();
-  },{passive:true});
-
-  window.addEventListener("resize",function(){
-    if(!touchQuery.matches) clearTouchHover();
   },{passive:true});
 })();
 </script>
@@ -2128,8 +2258,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 
   function clearTouchState(){
     if(!mq.matches) return;
-    const active=document.activeElement;
-    if(active && typeof active.blur==='function') active.blur();
+    /* Do not blur focused controls on mobile. Form fields must retain
+       focus so the on-screen keyboard stays open while typing. */
     document.documentElement.classList.remove('stackly-return-hover');
     document.body.classList.remove('stackly-return-hover','touch-hover');
   }
@@ -2174,6 +2304,114 @@ document.addEventListener("DOMContentLoaded",()=>{
 })();
 </script>
 
+
+<script id="stackly-custom-contact-subject">
+(function(){
+  const select=document.getElementById('contactSubject');
+  const wrap=document.getElementById('contactSubjectWrap');
+  const trigger=document.getElementById('contactSubjectTrigger');
+  const valueEl=document.getElementById('contactSubjectValue');
+  if(!select||!wrap||!trigger||!valueEl)return;
+
+  const menu=document.createElement('div');
+  menu.className='custom-subject-menu';
+  menu.setAttribute('role','listbox');
+  menu.setAttribute('aria-label','Enquiry type options');
+  document.body.appendChild(menu);
+
+  Array.from(select.options).forEach((opt,index)=>{
+    const item=document.createElement('button');
+    item.type='button';
+    item.className='custom-subject-option';
+    item.dataset.value=opt.value;
+    item.dataset.index=index;
+    item.textContent=opt.textContent;
+    item.setAttribute('role','option');
+    item.setAttribute('aria-selected','false');
+    item.addEventListener('click',function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      select.value=opt.value;
+      valueEl.textContent=opt.textContent;
+      valueEl.classList.toggle('placeholder',!opt.value);
+      trigger.classList.toggle('placeholder',!opt.value);
+      select.dispatchEvent(new Event('change',{bubbles:true}));
+      closeMenu();
+    });
+    menu.appendChild(item);
+  });
+
+  function positionMenu(){
+    if(!menu.classList.contains('open'))return;
+    const r=trigger.getBoundingClientRect();
+    const gap=6;
+    const viewportPad=12;
+    const maxH=Math.min(280,window.innerHeight-viewportPad*2);
+    menu.style.maxHeight=maxH+'px';
+    menu.style.width=Math.min(r.width,window.innerWidth-viewportPad*2)+'px';
+    let left=Math.max(viewportPad,Math.min(r.left,window.innerWidth-menu.offsetWidth-viewportPad));
+    const spaceBelow=window.innerHeight-r.bottom-viewportPad;
+    const spaceAbove=r.top-viewportPad;
+    let top;
+    if(spaceBelow>=Math.min(maxH,menu.scrollHeight+gap) || spaceBelow>=spaceAbove){
+      top=r.bottom+gap;
+    }else{
+      top=Math.max(viewportPad,r.top-Math.min(maxH,menu.scrollHeight)-gap);
+    }
+    menu.style.left=left+'px';
+    menu.style.top=top+'px';
+  }
+
+  function openMenu(){
+    menu.classList.add('open');
+    trigger.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+    Array.from(menu.children).forEach((item,i)=>{
+      const selected=select.selectedIndex===i;
+      item.classList.toggle('selected',selected);
+      item.setAttribute('aria-selected',selected?'true':'false');
+    });
+    requestAnimationFrame(positionMenu);
+  }
+
+  function closeMenu(){
+    menu.classList.remove('open');
+    trigger.classList.remove('open');
+    trigger.setAttribute('aria-expanded','false');
+  }
+
+  trigger.addEventListener('click',function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    if(menu.classList.contains('open'))closeMenu(); else openMenu();
+  });
+
+  document.addEventListener('click',function(ev){
+    if(!wrap.contains(ev.target) && !menu.contains(ev.target))closeMenu();
+  });
+  window.addEventListener('resize',positionMenu,{passive:true});
+  window.addEventListener('scroll',positionMenu,{passive:true});
+
+  select.addEventListener('change',function(){
+    const opt=select.options[select.selectedIndex];
+    valueEl.textContent=opt ? opt.textContent : 'Select an enquiry';
+    valueEl.classList.toggle('placeholder',!select.value);
+    trigger.classList.toggle('placeholder',!select.value);
+  });
+
+  const form=document.getElementById('contactForm');
+  if(form){
+    form.addEventListener('reset',function(){
+      requestAnimationFrame(function(){
+        valueEl.textContent='Select an enquiry';
+        trigger.classList.add('placeholder');
+        closeMenu();
+      });
+    });
+  }
+  trigger.classList.add('placeholder');
+})();
+</script>
 
 <script id="stackly-contact-reference-validation">
 (function(){
